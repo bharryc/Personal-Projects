@@ -1,0 +1,43 @@
+<html> <head>
+<title></title>
+<style type="text/css">
+div.box {
+	width: 10vw;
+	height: 8vw;
+	background:rgb(0,200,0);
+	margin:1vw;
+	float:left;
+	text-align:center;
+	font-size:5vw;
+}
+</style>
+
+<script type="text/javascript">
+var count = 1;
+function func1() {
+	var container = document.getElementById("container");
+	var newBox = document.createElement("div");
+	newBox.className = "box";
+
+	var last = parseInt(container.lastElementChild.innerHTML);
+	newBox.innerHTML = last*2;
+	container.appendChild(newBox);
+	count++;
+}
+function func2() {
+	var container = document.getElementById("container");
+	if(count > 1) {
+	container.removeChild(container.firstElementChild);
+	count--;
+	}
+}
+</script>
+</head>
+
+<body>
+<button id="button1" onClick="func1()">Button 1</button>
+<button id="button2" onClick="func2()">Button 2</button>
+<div id="container">
+<div class="box">1</div>
+</div>
+</body> </html>
