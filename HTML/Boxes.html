@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <title> Task 2 - Boxes </title>
+
+  <style>
+
+    /*css for the boxes. */
+    
+    #container div {
+      float: left;
+      border: 3px solid;
+      padding: 20px;
+      padding-top: 30px;
+      width: 25px;
+      height: 25px;
+      text-align: center;
+    }
+  </style>
+
+  <script>
+
+    function setUp(){
+
+      //console.log("Working");
+      var form = document.getElementById("config");
+      var numBoxes = form.elements["size"];
+      //console.log(numBoxes.value);
+
+      container.innerHTML = "";
+
+      //Increases the margin for the boxes, starting at 5px doubling each time.
+      for (var i  = 0; i < numBoxes.value; i++){
+        if(i == 0){
+          var boxPad = 5;
+        }else{
+          boxPad = boxPad * 2;
+          //console.log("boxPad" + boxPad);
+        }
+
+        //Local variable that becomes the margin, forms the string that is used later to set the margin of each box.s
+        var margin = boxPad + "px";
+
+        //Creates a div, and increases the inner HTML value by one for every box.
+        var createBox = document.createElement("div");
+        createBox.innerHTML = (i + 1);
+
+        //Changes the colour and the left margin for each box, then adding said box to the container.
+        createBox.style.background = colour();
+        createBox.style.marginLeft = margin;
+        container.appendChild(createBox);
+      }  
+    }
+
+     // Method to generate random colours for the boxes.
+    function colour(){
+
+      var red = Math.floor(Math.random() * 256);
+      var blue = Math.floor(Math.random() * 256);
+      var green = Math.floor(Math.random() * 256);
+
+      var rgb = "rgb(" + red + "," + blue + "," + green + ")";
+
+      //console.log("rgb" +rgb);
+
+      return rgb;
+    }
+
+  </script>
+
+</head>
+
+<body>
+
+<!--Form to enter how many boxes should be made. Calls the setUp function which creates the boxes.-->
+<form id = "config"> How many boxes do you want? 
+<input name = "size" id = "size" type = "text" />
+<input type = "button" value = "go" onclick = "setUp();" />
+</form><br /> 
+
+<!--Container to store the boxes.-->
+<div id = "container">
+</div>
+
+</body>
+</html>
