@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+    <title> Task 1 - Registration </title>
+    <head>
+
+        <style>
+
+            /* css for alternating row colours*/
+            #Table tr:nth-child(even){
+                background: #D3D3D3;
+            }
+
+        </style>
+
+        <script>
+
+            //Count and index are to count how many rows there are and for refrencing.
+            count = 0;
+            index = -1;
+
+            //Adds a row using the users input.
+            function createRow(){
+
+
+                //Retrieves the users input from the form assigning them to variables.
+                var form = document.getElementById("config");
+                var name = form.elements[0].value;
+                var age = form.elements[1].value;
+                var feet = form.elements[2].value;
+                var inches = form.elements[3].value;
+                var height = feet + inches;
+                var date = form.elements[4].value;
+
+                //Splits the date into an array for validation of the year.
+                var array = new Array();
+                array = date.split("-");
+
+                //Validation for the age and year to ensure they comply with the requirements.
+                if(age <18 || age > 60){
+                    alert("Age must be within 18 and 60 years old.");
+                    document.getElementById("config").reset();
+                }else if(array[0] != 2020){
+                    alert("Start date must be in 2020.");
+                    document.getElementById("config").reset();
+                }else{
+
+                    
+                    var tableBody = document.getElementById("Table body");
+
+                    //Creates variables that will be used for each cell, as well as a row to be added to the table.
+                    var td1 = document.createElement("td");
+                    var td2 = document.createElement("td");
+                    var td3 = document.createElement("td");
+                    var td4 = document.createElement("td");
+                    var td5 = document.createElement("button"); 
+                    var row = document.createElement("tr");
+
+                    //Assigns the variables to the cells as well as the delete button.
+                    td1.innerHTML = name;
+                    td2.innerHTML = age;
+                    td3.innerHTML = height;
+                    td4.innerHTML = date;
+                    td5.innerHTML = "Delete";
+
+                    
+                    //Increases the count and index of the row, updating the count on the page.
+                    count++;
+                    document.getElementById("count").innerHTML = "Enteries: " + count;         
+                    index++;
+                    
+                    //Function to remove a table when the delete buton is clicked, will also decrease the count, updating it in the process.
+                    td5.onclick = (indexA)=>{
+                        tableBody.deleteRow(indexA); 
+                        count--;
+                        document.getElementById("count").innerHTML = "Enteries: " + count;
+                    } 
+
+                    //Adds the cells to the row, then adds the row to the table body.
+                    row.appendChild(td1);
+                    row.appendChild(td2);
+                    row.appendChild(td3);
+                    row.appendChild(td4);
+                    row.appendChild(td5);
+                    tableBody.appendChild(row);
+
+                    //Resets the document when the row has been added to create a new row.
+                    document.getElementById("config").reset();
+                }
+            }
+            
+            //Resets the form.
+            function reset(){
+                document.getElementById("config").reset();
+            }
+
+        </script>
+
+    </head>
+
+    <body>
+
+        <!-- Takes in user input for the Name, Age, Height and Date.-->
+        <form id = "config">
+
+                <h1>Register for the Gym</h1>
+                <p> Please fill in the form to create a account.</p>
+                <hr>
+
+                <label for="name"><b>Name: </b></label>
+                <input type = "text" placeholder = "Enter your name" name = "name" required><br><br>
+            
+                <label for = "age"><b>Age: </b></label>
+                <input type = "text" placeholder = "Enter your age" name =  "age" required><br><br>
+                
+                <div style="display:block;">
+                    <!--Places the two drop down selections next to each other.-->
+                    <label for="height"> <b>Height: </b></label>
+                    <select id = "feet" placeholder = "feet" name = "feet">
+                        <option value="4'">4'</option>
+                        <option value="5'">5'</option>
+                        <option value="6'">6'</option>
+                    </select>
+                    <select id = "inches" placeholder = "inches" name = inches>
+                        <option value ="0">0"</option>
+                        <option value ="1">1"</option>
+                        <option value ="2">2"</option>
+                        <option value ="3">3"</option>
+                        <option value ="4">4"</option>
+                        <option value ="5">5"</option>
+                        <option value ="6">6"</option>
+                        <option value ="7">7"</option>
+                        <option value ="8">8"</option>
+                        <option value ="9">9"</option>
+                        <option value ="10">10"</option>
+                        <option value ="11">11"</option>
+                    </select>
+                </div><br>
+
+                <label for = "date"><b>Date: </b></label>
+                <input type = "date" placeholder = "25/02/2020" name = "date" required><br><br>
+
+                <!--Two buttons that execute commands based on thier names.-->
+                <input type = "button" value = "Display" onClick = "createRow();">
+                <input type = "button" value = "Reset" onClick = "reset();">
+
+        </form>
+
+        <br>
+        <br>
+
+        <!--Creates a table header for rows to be added when the createRow() function is called.-->
+        <div id = "count"> </div>
+        <table id= "Table" border = "1">
+            <thead id = "Table head">
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Height</th>
+                <th>Date</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody id = "Table body">
+        </tbody>
+        </table> 
+
+    </body>
+</html>
+
+
