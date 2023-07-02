@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Task 3 - Tic Tac Toe</title>
+    
+    <style>
+
+        /** css for the different states of the cell. **/
+
+        body{
+            Font: 30px, Arial;
+        }
+
+        /** Standard state of the grid. **/
+        .cellContainer {
+            display: grid;
+            grid-template-columns: 50px 50px 50px;
+            grid-template-rows: 50px 50px 50px;
+            grid-gap: 10px;
+            background-color: #FFFFFF;
+            padding: 5px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        /** For a cell that has not been selected. **/
+        .emptyCell {
+		    background-color: #FFFFFF;
+		    border: 1px solid #000000;
+		    padding: 10px;
+		    font-size: 400px;
+		    text-align: center;
+		    vertical-align: middle;
+		    line-height: 30px;
+        }
+
+        /** For a cell that has been selected, removes pointer events so it can't be changed. **/
+        .selectedCell {
+            background-color : #FFFFFF;
+            border: 1px solid #000000;
+            padding: 10px;
+            font-size: 40px;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 30px;
+            pointer-events: none;
+        }
+
+        /** For the three winning cells, highlights them in a different colour. **/
+        .winningCell {
+
+            background-color : #ffff00;
+            border: 1px solid #000000;
+            padding: 10px;
+            font-size: 40px;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 30px;
+            pointer-events: none;
+
+        }
+
+    </style>
+
+
+    <script>
+
+        //Sets the player icons and the colours for them.
+        var cross = "X".fontcolor("#FF0000");
+        var circle = "O".fontcolor("#008000");
+
+        //A variable to count how many moves have been made.
+        var moveCount = 0;
+
+        var sign = cross;
+        
+        //Creates the game board, adding divs to a container giving them click events that will be used to make a selection.
+        function start(){
+            var container = document.getElementById("container");
+            for( i = 0; i < 9; i++){
+                var cell = document.createElement("div");
+                cell.className = "emptyCell";
+                cell.setAttribute("onClick", "choice(this)");
+                cell.setAttribute("id", (i+1));
+                container.appendChild(cell);
+            }
+        }
+
+        //Selects a cell, adds a player icon in the cell, incriments the move count and checks for a win or draw.
+        function choice(cell){
+            selectedCell = cell;
+            selectedCell.innerHTML = sign;
+            cell.className = "selectedCell";
+            checkWin();
+            moveCount++;
+            noMoves();
+            sign = changePlayer(sign);        
+        }
+
+        //Changes the player icon for the next turn to allow for two players.
+        function changePlayer(sign){
+            if(sign == cross){
+                sign = circle;
+            }else if(sign == circle){
+                sign = cross;
+            }
+            return sign;
+        }   
+
+        //The winning combinations in the grid.
+        const winningCombos = [[0,1,2],[0,3,6],[0,4,8],[1,4,7],[2,5,8],[2,4,6],[3,4,5],[6,7,8]];
+
+
+        //Method to check if a player has won the game.
+        function checkWin(){
+
+            var winner = false;
+
+            var container = document.getElementById("container");
+            var cells = container.childNodes;
+
+            //Goes through all the winning combonations of the grid to see if there is a match.
+            winningCombos.forEach((match) => {
+
+                var one = match[0];
+                var two = match[1];
+                var three = match[2];
+
+                var player = cells[one].innerText;
+
+                //Checks to see if a complete match has been made using the player icon found in the first of the selected cells.
+                const cell1 = cells[one].innerText;
+                const cell2 = cells[two].innerText;
+                const cell3 = cells[three].innerText;
+
+                const row = cell1 !== "" && cell1 == cell2 && cell2 ==  cell3;
+
+                //For all of the matching cells change the css styling to the winner class to highlight the winner.
+                if(row){
+                    winner = true;
+                    match.forEach((index) => {
+                        cells[index].className = "winningCell";
+                        win(player);
+                    })
+                }
+            })
+
+        }
+
+        //Function to check if the game is a draw, if the moveCount is 9, it means all the cells have been filled and its a draw if there is no match.
+        function noMoves(){
+
+            if(moveCount == "9"){
+                document.getElementById("output").innerHTML = "There are no available moves, therefore it's a draw!";
+            }
+
+        }
+
+        //Displays the winner to the game board when this method is called at the end of the checkWin() function.
+        function win(player){
+
+            var output = document.getElementById("output");
+            var winner = player;
+            output.innerHTML = "Player " + winner + " wins!";
+        }
+
+    
+        //Resets the game board and the output messages that are displayed.
+        function reset(){
+
+            document.getElementById("output").innerHTML = "";
+
+            document.getElementById("container").innerHTML = "";
+
+            moveCount = 0;
+
+            start();
+
+
+        }
+
+
+    </script>
+
+
+
+</head>
+
+<!-- Loads the start() method on load when the game starts -->
+<body onload = "start();">
+    <div id ="output"> </div>
+    <div id = "container" class = "cellContainer"></div>
+    <input type = "button" value = "reset" onClick = "reset();">
+</body>
+
+</html>
