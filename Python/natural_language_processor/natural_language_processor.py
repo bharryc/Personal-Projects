@@ -34,15 +34,15 @@ def process_text(text):
     processed_text = ' '.join(tokens)
     return processed_text
 
-
 #scrapes all text from the <p> tags from the html given
 def scrape(url):
-
     try:
+        #retrives the html and status code
         response = requests.get(url)
         response.raise_for_status()
         html = response.text 
 
+        #scrapes all the text in the <p> tags and returns it
         soup = BeautifulSoup(html, 'html.parser')
         para_tags = soup.find_all('p')
         text = ' '.join(tag.get_text() for tag in para_tags)
@@ -55,14 +55,15 @@ def scrape(url):
 def sentiment_analysis():
     input = request.get_json()
 
+    #checks for what params are given, if url it gets html if not it cleans the text up
     if 'text' in input:
         text = input['text']
 
         cleaned_text = process_text(text)
 
+    #extracts the html and returns status code 400 if it fails.
     elif 'url' in input:
         url = input['url']
-       
         extracted = scrape(url)
 
         if extracted is None:
@@ -73,6 +74,7 @@ def sentiment_analysis():
     else:
         return jsonify({'error' : 'invalid params'}), 400
     
+    #performs the sentiment anlysis oon the processed text
     analyser = SentimentIntensityAnalyzer()
 
     sentiment_score = analyser.polarity_scores(cleaned_text)
@@ -82,6 +84,7 @@ def sentiment_analysis():
     neut_sentiment = sentiment_score['neu']
     pos_sentiment = sentiment_score['pos']
 
+    # finds the overall sentiment label for the given text 
     if sentiment > 0:
         sentiment_label = 'Positive'
     elif sentiment < 0:
@@ -89,6 +92,7 @@ def sentiment_analysis():
     else:
         sentiment_label = 'Neutral'
 
+    #builds and returns the response with scores and label.
     results = {'sentiment score': sentiment, 
                'sentiment label': sentiment_label, 
                'negative sentiment score' : neg_sentiment, 
