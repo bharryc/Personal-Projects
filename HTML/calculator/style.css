@@ -22,7 +22,7 @@ html * {
 .output {
     font-size: 2rem;
     text-align: end;
-    background: hsl(202, 11%, 29%);
+    background: rgb(66, 76, 82);
     color: rgb(255, 255, 255);
     padding-block-start: 0.5rem;
     padding-block-end: 0.5rem;
