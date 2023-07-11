@@ -103,13 +103,12 @@ def sentiment_analysis():
     return jsonify(results), 200
 
 
-@app.route('/language', method=['POST'])
+@app.route('/language', methods=['POST'])
 def find_language():
     input = request.get_json()
 
     if 'text' in input:
         text = input['text']
-
         cleaned_text = re.sub('[^\w\s]', '', text)
         cleaned_text.lower()
 
