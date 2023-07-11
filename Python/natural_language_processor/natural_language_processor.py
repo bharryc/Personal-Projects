@@ -110,12 +110,17 @@ def find_language():
     if 'text' in input:
         text = input['text']
 
-        cleaned_text = process_text(text)
+        cleaned_text = re.sub('[^\w\s]', '', text)
+        cleaned_text.lower()
+
     else:
         return jsonify({'error' : 'invalid params'}), 400
     
+    language, score = langid.classify(cleaned_text)
+
+    results = {'language' : language, 'confidence' : score}
     
-    
+    return jsonify(results), 200 
 
 
 if __name__ == '__main__':
