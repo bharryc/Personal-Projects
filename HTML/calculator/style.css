@@ -34,6 +34,7 @@ html * {
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 1px;
     background: rgb(137, 157, 174)
+   
 }
 
 .enter {
@@ -56,6 +57,7 @@ html * {
     padding-inline-start: 1.25rem;
     padding-inline-end: 1.25rem;
     font-size: 1.5rem;
+
 }
 
 .key:active {

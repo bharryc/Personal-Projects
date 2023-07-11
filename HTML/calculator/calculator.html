@@ -10,10 +10,10 @@
             <div class="calculator">
                 <div class="output">0</div>
                 <div class="keys">
-                    <button class="key-operator">+</button>
-                    <button class="key-operator">-</button>
-                    <button class="key-operator">*</button>
-                    <button class="key-operator">/</button>
+                    <button class="key-operator" data-action="add">+</button>
+                    <button class="key-operator" data-action="sub">-</button>
+                    <button class="key-operator" data-action="mul">x</button>
+                    <button class="key-operator" data-action="div">/</button>
                     <button class="key">7</button>
                     <button class="key">8</button>
                     <button class="key">9</button>
@@ -24,11 +24,12 @@
                     <button class="key">2</button>
                     <button class="key">3</button>
                     <button class="key">0</button>
-                    <button class="key">.</button>
-                    <button class="key">C</button>
-                    <button class="enter">=</button>
+                    <button class="key" data-action="dec">.</button>
+                    <button class="key" data-action="del">C</button>
+                    <button class="enter" data-action="calc">=</button>
                 </div>
             </div>
         </div>
+        <script src="script.js"></script>
     </body>
 </html>
