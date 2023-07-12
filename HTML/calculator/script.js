@@ -1,11 +1,15 @@
+// gets the elements from the html
 const calculator = document.querySelector('.calculator')
 const output = calculator.querySelector('.output')
 const keys = calculator.querySelector('.keys')
 
+// performs the calculations 
 const calculate = (n1, operator, n2 ) => {
     let result = '';
     const firstNum = parseFloat(n1);
     const secondNum = parseFloat(n2);
+
+    // performs calc based on what operator given 
     if (operator === 'add'){
         result = firstNum + secondNum;
     }else if (operator =='sub'){
@@ -18,6 +22,7 @@ const calculate = (n1, operator, n2 ) => {
     return result;
 }
 
+// event listener for clicks
 calculator.addEventListener('click', e => {
     if (e.target.matches('button')){
         const key = e.target;
@@ -26,6 +31,7 @@ calculator.addEventListener('click', e => {
         const total = output.textContent;
         const previousKey = calculator.dataset.previousKey
 
+        // number keys 
         if (!action){ 
             if (total === '0' || previousKey === 'calculate' || previousKey === 'operator'){
                 output.textContent = keyContent;
@@ -35,6 +41,7 @@ calculator.addEventListener('click', e => {
             calculator.dataset.previousKey = 'number';
         }
 
+        // deciaml keys
         if (action === 'dec'){
             if (!total.includes('.')){
                 output.textContent = total + '.';
@@ -44,6 +51,7 @@ calculator.addEventListener('click', e => {
             calculator.dataset.previousKey = 'decimal';
         }
 
+        // operator keys 
         if ( action === 'add' || action === 'mul' || action === 'sub' || action === 'div'){
             const firstValue = calculator.dataset.firstValue;
             const operator = calculator.dataset.operator;
@@ -61,6 +69,7 @@ calculator.addEventListener('click', e => {
             calculator.dataset.operator = action;
         }
 
+        // delete key 
         if (action === 'del'){
             if (key.textContent === 'C'){
                 calculator.dataset.firstValue = '';
@@ -76,6 +85,7 @@ calculator.addEventListener('click', e => {
 
         }
 
+        // calculate key 
         if (action === 'calc'){
             let firstValue = calculator.dataset.firstValue;
             const operator = calculator.dataset.operator;
