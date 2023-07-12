@@ -36,7 +36,7 @@ calculator.addEventListener('click', e => {
             if (total === '0' || previousKey === 'calculate' || previousKey === 'operator'){
                 output.textContent = keyContent;
             } else {
-                output.textContent = parseFloat(total) + parseFloat(keyContent);
+                output.textContent = total === '0' ? keyContent : total + keyContent;
             }
             calculator.dataset.previousKey = 'number';
         }
@@ -44,7 +44,7 @@ calculator.addEventListener('click', e => {
         // deciaml keys
         if (action === 'dec'){
             if (!total.includes('.')){
-                output.textContent = total + '.';
+                output.textContent = total + keyContent;
             }else if ( previousKey === 'operator' || previousKey === 'calculate'){
                 output.textContent = '0';
             }
