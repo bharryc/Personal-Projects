@@ -1,0 +1,84 @@
+html * {
+    font-family: 'Courier New', monospace;
+}
+
+.container {
+    height: 20rem;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+  }
+  
+.calculator {
+        border-radius: 10px;
+        box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.15), 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+        margin-inline-start: auto;
+        margin-inline-end: auto;
+        margin-block-start: 2em;
+        max-inline-size: 22rem;
+        overflow: hidden;
+}
+
+.output {
+    font-size: 2rem;
+    text-align: end;
+    background: rgb(66, 76, 82);
+    color: rgb(255, 255, 255);
+    padding-block-start: 0.5rem;
+    padding-block-end: 0.5rem;
+    padding-inline-end: 0.75rem;
+}
+
+.keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1px;
+    background: rgb(137, 157, 174)
+   
+}
+
+.enter {
+    font-size: 1.5rem;
+    grid-column: 4/5;
+    grid-row: 2 /span 4;
+    border: none;
+    padding-block-start: 0.5rem;
+    padding-block-end: 0.5rem;
+    padding-inline-start: 1.25rem;
+    padding-inline-end: 1.25rem;
+    background: rgb(243, 130, 0)
+    
+}
+
+.key{
+    border: none;
+    padding-block-start: 0.5rem;
+    padding-block-end: 0.5rem;
+    padding-inline-start: 1.25rem;
+    padding-inline-end: 1.25rem;
+    font-size: 1.5rem;
+
+}
+
+.key:active {
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.3) inset;
+  outline: none;
+}
+
+.key-operator {
+    border: none;
+    padding-block-start: 0.5rem;
+    padding-block-end: 0.5rem;
+    padding-inline-start: 1.25rem;
+    padding-inline-end: 1.25rem;
+    font-size: 1.5rem;
+    background: rgb(211, 220, 228);
+}
+
+.key-operator:active {
+    background: rgb(192, 205, 216);
+  }
+
+.enter:active {
+    background: rgb(192, 205, 216);
+}
