@@ -8,7 +8,7 @@ Repo containing personal projects that I have worked on in and out of my studies
 
 ### Dependencies
 
-Depending on the lproject you might need:
+Depending on the project you might need:
 * Java
 * Python
 * Haskell
